@@ -1,0 +1,10 @@
+.colorDigit {
+    color: rgb(72, 201, 72);
+}
+
+.separator {
+    border-top: 6px solid rgb(72, 201, 72);
+    margin-top: 20px;
+    margin-left: 40px;
+    margin-right: 40px;
+  }

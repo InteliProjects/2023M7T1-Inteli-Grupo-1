@@ -1,0 +1,31 @@
+[
+  {
+    "id": 2,
+    "title": "Maquininha Stone Modelo 1",
+    "price": 79.99,
+    "category": "Electronics",
+    "description": "Experience high-quality sound with these wireless headphones.",
+    "image": "https://www.idinheiro.com.br/wp-content/uploads/2021/09/maquininha-Stone-e-boa.jpg",
+    "quantity": 1,
+    "favorite": false
+  },
+  {
+    "id": 3,
+    "title": "Maquininha Stone Modelo 2",
+    "price": 149.99,
+    "category": "Fashion",
+    "description": "Elegant and timeless, this classic watch is perfect for any occasion.",
+    "image": "https://s2-valor-investe.glbimg.com/N9EMv2LeDY8TkTY5dmWUyxONlvo=/0x0:960x640/924x0/smart/filters:strip_icc()/i.s3.glbimg.com/v1/AUTH_f035dd6fd91c438fa04ab718d608bbaa/internal_photos/bs/2019/H/D/v0sa9AQXqpfepnkwoD6w/stone.jpg",
+    "quantity": 1
+  },
+  {
+    "id": 3,
+    "title": "Maquininha Stone Modelo 2",
+    "price": 149.99,
+    "category": "Fashion",
+    "description": "Elegant and timeless, this classic watch is perfect for any occasion.",
+    "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTwqRkuw4tAmyV5CWthL1HEHG9OWfLf1F-aFbr4EIqDDZjRQvIaWkBfX6Qj5FOBV5UfEWs&usqp=CAU",
+    "quantity": 1
+  }
+]
+  

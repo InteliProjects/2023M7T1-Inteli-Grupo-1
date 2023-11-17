@@ -1,0 +1,28 @@
+{
+  "development": {
+    "username": "postgres",
+    "password": "Admin12345",
+    "database": "postgres",
+    "host": "localhost",
+    "port": 5432,
+    "dialect": "postgres",
+    "dialectOptions": {
+    }
+  },
+  "test": {
+    "password": "LeleoZika123",
+    "database": "pedrao",
+    "host": "localhost",
+    "dialect": "postgres",
+    "dialectOptions": {
+    }
+  },
+  "production": {
+    "password": "LeleoZika123",
+    "database": "pedrao",
+    "host": "localhost",
+    "dialect": "postgres",
+    "dialectOptions": {
+    }
+  }
+}

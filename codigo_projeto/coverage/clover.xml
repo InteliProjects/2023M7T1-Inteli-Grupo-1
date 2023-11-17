@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<coverage generated="1696797914500" clover="3.2.0">
+  <project timestamp="1696797914500" name="All files">
+    <metrics statements="48" coveredstatements="18" conditionals="8" coveredconditionals="2" methods="6" coveredmethods="2" elements="62" coveredelements="22" complexity="0" loc="48" ncloc="48" packages="5" files="10" classes="10"/>
+    <package name="connections">
+      <metrics statements="8" coveredstatements="6" conditionals="2" coveredconditionals="2" methods="1" coveredmethods="1"/>
+      <file name="pg.ts" path="C:\Users\Inteli\OneDrive\Documentos\GitHub\Modulo7\Grupo-1\codigo_projeto\backend\src\api\src\connections\pg.ts">
+        <metrics statements="8" coveredstatements="6" conditionals="2" coveredconditionals="2" methods="1" coveredmethods="1"/>
+        <line num="4" count="2" type="stmt"/>
+        <line num="6" count="2" type="stmt"/>
+        <line num="25" count="2" type="stmt"/>
+        <line num="26" count="2" type="stmt"/>
+        <line num="28" count="2" type="stmt"/>
+        <line num="29" count="0" type="stmt"/>
+        <line num="33" count="0" type="stmt"/>
+        <line num="38" count="2" type="stmt"/>
+      </file>
+    </package>
+    <package name="constants">
+      <metrics statements="2" coveredstatements="2" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+      <file name="errors.ts" path="C:\Users\Inteli\OneDrive\Documentos\GitHub\Modulo7\Grupo-1\codigo_projeto\backend\src\api\src\constants\errors.ts">
+        <metrics statements="1" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+        <line num="1" count="3" type="stmt"/>
+      </file>
+      <file name="success.ts" path="C:\Users\Inteli\OneDrive\Documentos\GitHub\Modulo7\Grupo-1\codigo_projeto\backend\src\api\src\constants\success.ts">
+        <metrics statements="1" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+        <line num="1" count="2" type="stmt"/>
+      </file>
+    </package>
+    <package name="controllers">
+      <metrics statements="5" coveredstatements="4" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
+      <file name="order_product_controller.ts" path="C:\Users\Inteli\OneDrive\Documentos\GitHub\Modulo7\Grupo-1\codigo_projeto\backend\src\api\src\controllers\order_product_controller.ts">
+        <metrics statements="5" coveredstatements="4" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
+        <line num="6" count="1" type="stmt"/>
+        <line num="10" count="1" type="stmt"/>
+        <line num="12" count="1" type="stmt"/>
+        <line num="14" count="1" type="stmt"/>
+        <line num="18" count="0" type="stmt"/>
+      </file>
+    </package>
+    <package name="models">
+      <metrics statements="4" coveredstatements="4" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+      <file name="Address.ts" path="C:\Users\Inteli\OneDrive\Documentos\GitHub\Modulo7\Grupo-1\codigo_projeto\backend\src\api\src\models\Address.ts">
+        <metrics statements="1" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+        <line num="6" count="1" type="stmt"/>
+      </file>
+      <file name="Inventory.ts" path="C:\Users\Inteli\OneDrive\Documentos\GitHub\Modulo7\Grupo-1\codigo_projeto\backend\src\api\src\models\Inventory.ts">
+        <metrics statements="1" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+        <line num="6" count="1" type="stmt"/>
+      </file>
+      <file name="OrderProduct.ts" path="C:\Users\Inteli\OneDrive\Documentos\GitHub\Modulo7\Grupo-1\codigo_projeto\backend\src\api\src\models\OrderProduct.ts">
+        <metrics statements="1" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+        <line num="5" count="1" type="stmt"/>
+      </file>
+      <file name="User.ts" path="C:\Users\Inteli\OneDrive\Documentos\GitHub\Modulo7\Grupo-1\codigo_projeto\backend\src\api\src\models\User.ts">
+        <metrics statements="1" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+        <line num="5" count="1" type="stmt"/>
+      </file>
+    </package>
+    <package name="services">
+      <metrics statements="29" coveredstatements="2" conditionals="6" coveredconditionals="0" methods="4" coveredmethods="0"/>
+      <file name="address_services.ts" path="C:\Users\Inteli\OneDrive\Documentos\GitHub\Modulo7\Grupo-1\codigo_projeto\backend\src\api\src\services\address_services.ts">
+        <metrics statements="12" coveredstatements="1" conditionals="2" coveredconditionals="0" methods="3" coveredmethods="0"/>
+        <line num="10" count="1" type="stmt"/>
+        <line num="14" count="0" type="stmt"/>
+        <line num="16" count="0" type="stmt"/>
+        <line num="18" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="20" count="0" type="stmt"/>
+        <line num="30" count="0" type="stmt"/>
+        <line num="41" count="0" type="stmt"/>
+        <line num="51" count="0" type="stmt"/>
+        <line num="66" count="0" type="stmt"/>
+        <line num="68" count="0" type="stmt"/>
+        <line num="80" count="0" type="stmt"/>
+        <line num="86" count="0" type="stmt"/>
+      </file>
+      <file name="order_product_services.ts" path="C:\Users\Inteli\OneDrive\Documentos\GitHub\Modulo7\Grupo-1\codigo_projeto\backend\src\api\src\services\order_product_services.ts">
+        <metrics statements="17" coveredstatements="1" conditionals="4" coveredconditionals="0" methods="1" coveredmethods="0"/>
+        <line num="11" count="1" type="stmt"/>
+        <line num="15" count="0" type="stmt"/>
+        <line num="17" count="0" type="stmt"/>
+        <line num="19" count="0" type="stmt"/>
+        <line num="26" count="0" type="stmt"/>
+        <line num="28" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="30" count="0" type="stmt"/>
+        <line num="32" count="0" type="stmt"/>
+        <line num="41" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="43" count="0" type="stmt"/>
+        <line num="45" count="0" type="stmt"/>
+        <line num="54" count="0" type="stmt"/>
+        <line num="56" count="0" type="stmt"/>
+        <line num="61" count="0" type="stmt"/>
+        <line num="63" count="0" type="stmt"/>
+        <line num="73" count="0" type="stmt"/>
+        <line num="75" count="0" type="stmt"/>
+      </file>
+    </package>
+  </project>
+</coverage>

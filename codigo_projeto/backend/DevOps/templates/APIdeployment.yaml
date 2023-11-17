@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: devops-api
+spec:
+  replicas: {{ .Values.APIreplicaCount }}
+  selector:
+    matchLabels:
+      app: api-container
+  template:
+    metadata:
+      labels:
+        app: api-container
+    spec:
+      containers:
+      - name: api-container
+        image: {{ .Values.image.repository }}:{{ .Values.image.apitag }}
+        imagePullPolicy: {{ .Values.image.pullPolicy }}
+        ports:
+        - containerPort: {{ .Values.service.apiTargetPort}}
+    # cpu and memory
+        resources:
+          limits:
+            cpu: {{ .Values.resources.limits.cpu }}
+            memory: {{ .Values.resources.limits.memory }}
+          requests:
+            cpu: {{ .Values.resources.requests.cpu }}
+            memory: {{ .Values.resources.requests.memory }}

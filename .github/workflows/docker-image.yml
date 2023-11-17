@@ -1,0 +1,64 @@
+name: Docker Image CI
+
+env:
+  AWS_ACCESS_KEY_ID: 'ASIA2MSYAP5FPLEKE4VB'
+  AWS_SECRET_ACCESS_KEY: 'NeNjAHiZ70jjXFTYw7NWVVjZVybXIrjDw5x1wnt0'
+  AWS_SESSION_TOKEN: 'FwoGZXIvYXdzEH8aDGU0RDbzNGGOEZMAryLPAZy7xIZYBfYotl+RvEm9JVOJ5djxkwDn8n4Y2yfP4v5syLMQH43gk8E/fIrkkRQvRjnbFSE/dsK0SdlLTiGgC55NvfUsoxoW4SGZJDOVz+o8moAHxnljreUQQeFuCKCY54kslXx9dSzcdzibgHZPeWGBaUE+hsPIaNhPzp8C9/xbkbp8Gm9kLLQcWkPa3aRLBDQT0cF7jOUlGVjBQ8o43/H4Bui8qz9C9BoJp72L+tDrWcFN42yq2uihLTzuETLoZkzOC7UaLbPdDc5pNDwSFCjQk4CpBjIthHdjE4G4sBN9Sg6d6aOQ5qTTJBZieljhYhQaaPyW187NLrVT4Rp/itELprbm'
+  AWS_REGION: 'us-east-1'
+  AWS_ACCOUNT_ID: '714222894922'
+
+
+on:
+  push:
+    branches:
+      - "TEST-ACTIONS"
+  pull_request:
+    branches:
+      - "TEST-ACTIONS"
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+    - name: Build the API image
+      run: docker build . --file codigo_projeto/backend/src/api/Dockerfile.api --tag api:api
+    - name: Build the Plans image
+      run: docker build . --file codigo_projeto/backend/src/plans/Dockerfile.plans --tag plans:plans
+    - name: Build the Products image
+      run: docker build . --file codigo_projeto/backend/src/product/Dockerfile.product --tag products:products
+    - name: Check images
+      run: docker images
+    - name: Configure AWS CLI
+      run: |
+        echo "[default]" >> aws-credentials
+        echo "aws_access_key_id = ${{ env.AWS_ACCESS_KEY_ID }}" >> aws-credentials
+        echo "aws_secret_access_key = ${{ env.AWS_SECRET_ACCESS_KEY }}" >> aws-credentials
+        echo "aws_session_token = ${{ env.AWS_SESSION_TOKEN }}" >> aws-credentials
+    - name: Authenticate with ECR
+      run: aws ecr get-login-password --region ${{ env.AWS_REGION }} | docker login --username AWS --password-stdin ${{ env.AWS_ACCOUNT_ID }}.dkr.ecr.${{ env.AWS_REGION }}.amazonaws.com
+    - name: Tag API image
+      run: docker tag api:api ${{ env.AWS_ACCOUNT_ID }}.dkr.ecr.${{ env.AWS_REGION }}.amazonaws.com/joao-containers:api
+    - name: Push API image to ECR
+      run: docker push ${{ env.AWS_ACCOUNT_ID }}.dkr.ecr.${{ env.AWS_REGION }}.amazonaws.com/joao-containers:api  
+    - name: Tag Plans image
+      run: docker tag plans:plans ${{ env.AWS_ACCOUNT_ID }}.dkr.ecr.${{ env.AWS_REGION }}.amazonaws.com/joao-containers:plans
+    - name: Push Plans image to ECR
+      run: docker push ${{ env.AWS_ACCOUNT_ID }}.dkr.ecr.${{ env.AWS_REGION }}.amazonaws.com/joao-containers:plans
+    - name: Tag Products image
+      run: docker tag products:products ${{ env.AWS_ACCOUNT_ID }}.dkr.ecr.${{ env.AWS_REGION }}.amazonaws.com/joao-containers:products
+    - name: Push Products image to ECR
+      run: docker push ${{ env.AWS_ACCOUNT_ID }}.dkr.ecr.${{ env.AWS_REGION }}.amazonaws.com/joao-containers:products
+    - name: Download Helm
+      run: |
+        curl -fsSL -o helm-linux-amd64.tar.gz https://get.helm.sh/helm-v3.12.3-linux-amd64.tar.gz
+        tar -zxvf helm-linux-amd64.tar.gz
+        sudo mv linux-amd64/helm /usr/local/bin/helm
+    - name: Configure AWS EKS
+      run: |
+        aws eks update-kubeconfig --name Joao-Cluster
+      
+    - name: Deploy to EKS
+      run: |
+        helm upgrade --recreate-pods devops codigo_projeto/backend/DevOps

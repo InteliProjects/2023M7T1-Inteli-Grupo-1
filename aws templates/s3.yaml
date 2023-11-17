@@ -1,0 +1,11 @@
+AWSTemplateFormatVersion: 2010-09-09  # Define a versão do formato do modelo CloudFormation.
+
+Description: CloudFormation Template for creating a S3 Bucket  # Descreve o propósito do modelo.
+
+Resources:
+  S3Bucket:  # Define um recurso para criar um bucket S3.
+    Type: 'AWS::S3::Bucket'  # Especifica o tipo de recurso como um bucket S3.
+    Properties:
+      Tags:  # Define as tags (rótulos) para o bucket S3.
+        - Key: Name  # Define a chave da tag como "Name".
+          Value: grupo-jade-m7  # Define o valor da tag como "grupo-jade-m7".

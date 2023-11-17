@@ -1,0 +1,105 @@
+AWSTemplateFormatVersion: '2010-09-09'  # Define a versão do formato do modelo CloudFormation.
+
+Description: CloudFormation Template for creating security groups allowing HTTP traffic  # Descreve o propósito do modelo.
+
+Resources:
+  # Define um Security Group (Grupo de Segurança) para o frontend.
+  FrontSecurityGroup:
+    Type: AWS::EC2::SecurityGroup  # Especifica o tipo de recurso como um Grupo de Segurança EC2.
+    Properties:
+      GroupDescription: Allow HTTP traffic  # Descreve a finalidade do Grupo de Segurança.
+      VpcId: !ImportValue VPCId  # Importa o valor da variável VPCId de outro modelo.
+      SecurityGroupIngress:
+        - IpProtocol: tcp  # Permite tráfego TCP.
+          FromPort: 80  # Porta de origem 80.
+          ToPort: 8005  # Porta de destino 8005.
+          CidrIp: 0.0.0.0/0  # Permite tráfego de qualquer endereço IP.
+        - IpProtocol: tcp
+          FromPort: 22
+          ToPort: 22
+          CidrIp: 0.0.0.0/0  # Permite tráfego SSH de qualquer endereço IP.
+
+      Tags:  # Define tags para o recurso.
+        - Key: Name  # Define a chave da tag como "Name".
+          Value: Frontend Security Group  # Define o valor da tag como "Frontend Security Group".
+
+  # Define um Security Group (Grupo de Segurança) para o backend.
+  BackSecurityGroup:
+    Type: AWS::EC2::SecurityGroup
+    Properties:
+      GroupDescription: Allow HTTP traffic
+      VpcId: !ImportValue VPCId
+      SecurityGroupIngress:
+        - IpProtocol: tcp
+          FromPort: 80
+          ToPort: 8005
+          CidrIp: 0.0.0.0/0
+        - IpProtocol: tcp
+          FromPort: 22
+          ToPort: 22
+          CidrIp: 0.0.0.0/0
+      
+      Tags:
+        - Key: Name
+          Value: Backend Security Group
+
+  # Define um Security Group (Grupo de Segurança) para o bastion host (máquina de acesso).
+  BHSecurityGroup:
+    Type: AWS::EC2::SecurityGroup
+    Properties:
+      GroupDescription: Allow HTTP traffic
+      VpcId: !ImportValue VPCId
+      SecurityGroupIngress:
+        - IpProtocol: tcp
+          FromPort: 80
+          ToPort: 8005
+          CidrIp: 0.0.0.0/0
+        - IpProtocol: tcp
+          FromPort: 22
+          ToPort: 22
+          CidrIp: 0.0.0.0/0
+      
+      Tags:
+        - Key: Name
+          Value: Bastion Host Security Group
+
+  # Define um Security Group (Grupo de Segurança) para o banco de dados.
+  DBSecurityGroup:
+    Type: AWS::EC2::SecurityGroup
+    Properties:
+      GroupDescription: Allow HTTP traffic
+      VpcId: !ImportValue VPCId
+      SecurityGroupIngress:
+        - IpProtocol: tcp
+          FromPort: 80
+          ToPort: 8005
+          CidrIp: 0.0.0.0/0
+      Tags:
+        - Key: Name
+          Value: Database Security Group
+
+Outputs:
+  # Define saídas para cada Grupo de Segurança criado.
+  FrontSecurityGroup:
+    Description: Frontend Security Group
+    Value: !Ref FrontSecurityGroup  # Obtém uma referência para o FrontSecurityGroup.
+    Export:
+      Name: FrontSecurityGroup  # Exporta o nome do FrontSecurityGroup como uma variável.
+
+  BackSecurityGroup:
+    Description: Backend Security Group
+    Value: !Ref BackSecurityGroup # Obtém uma referência para o BackSecurityGroup.
+    Export:
+      Name: BackSecurityGroup # Exporta o nome do BackSecurityGroup como uma variável.
+  
+  BHSecurityGroup:
+    Description: Bastion Host Security Group
+    Value: !Ref BHSecurityGroup # Obtém uma referência para o BHSecurityGroup.
+    Export:
+      Name: BHSecurityGroup # Exporta o nome do BHSecurityGroup como uma variável.
+
+  DBSecurityGroup:
+    Description: Database Security Group # Obtém uma referência para o DBSecurityGroup.
+    Value: !Ref DBSecurityGroup
+    Export:
+      Name: DBSecurityGroup # Exporta o nome do DBSecurityGroup como uma variável.

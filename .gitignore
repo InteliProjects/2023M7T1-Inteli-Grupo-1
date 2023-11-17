@@ -1,0 +1,18 @@
+# Comentários começam com um sinal de cerquilha
+
+# Ignorar arquivos temporários
+*.tmp
+*.bak
+
+# Ignorar arquivos de compilação
+*.o
+*.class
+
+# Ignorar arquivos de configuração pessoal
+config.ini
+
+# Ignorar diretórios de dependências
+node_modules
+
+# ignorar variáveis de ambiente
+#.env

@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: devops-product
+spec:
+  replicas: {{ .Values.PRODUCTreplicaCount }}
+  selector:
+    matchLabels:
+      app: product-container
+  template:
+    metadata:
+      labels:
+        app: product-container
+    spec:
+      containers:
+      - name: products-container
+        image: {{ .Values.image.repository }}:{{ .Values.image.prodtag }}
+        imagePullPolicy: {{ .Values.image.pullPolicy }}
+        ports:
+        - containerPort: {{ .Values.service.productsTargetPort }}
+    # cpu and memory
+        resources:
+          limits:
+            cpu: {{ .Values.resources.limits.cpu }}
+            memory: {{ .Values.resources.limits.memory }}
+          requests:
+            cpu: {{ .Values.resources.requests.cpu }}
+            memory: {{ .Values.resources.requests.memory }}

@@ -1,0 +1,46 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Description: CloudFormation Template for creating a PostgreSQL RDS instance with backups
+
+Resources:
+  # Define um grupo de sub-redes para a instância RDS
+  DBSubnetGroup:
+    Type: AWS::RDS::DBSubnetGroup
+    Properties:
+      DBSubnetGroupDescription: Subnet group for RDS
+      SubnetIds: 
+        - !ImportValue PrivateSubnet1Id
+        - !ImportValue PrivateSubnet2Id
+        - !ImportValue PrivateSubnet3Id
+      Tags:
+        - Key: Name
+          Value: dev-main-db-subnet-group
+
+  # Define a instância RDS PostgreSQL
+  RDSInstance:
+    Type: AWS::RDS::DBInstance
+    Properties:
+      AllocatedStorage: 20
+      DBInstanceClass: db.t3.micro
+      Engine: postgres
+      MasterUsername: postgres
+      MasterUserPassword: Admin12345
+      DBSubnetGroupName: !Ref DBSubnetGroup  # Referência ao grupo de sub-redes criado acima
+      BackupRetentionPeriod: 1
+      MultiAZ: false
+      PubliclyAccessible: false  # Isso deve ser configurado com base em requisitos de segurança
+      VPCSecurityGroups: 
+        - !ImportValue DBSecurityGroup  # Usa o valor do parâmetro aqui
+      Tags:
+        - Key: Name
+          Value: Main-psql
+
+Outputs:
+  # Define uma saída para o endpoint da instância RDS criada
+  RDSInstanceEndpoint:
+    Description: Endpoint of the created RDS instance
+    Value: !GetAtt RDSInstance.Endpoint.Address
+
+  # Define uma saída para a porta da instância RDS criada
+  RDSInstancePort:
+    Description: Port of the created RDS instance
+    Value: !GetAtt RDSInstance.Endpoint.Port

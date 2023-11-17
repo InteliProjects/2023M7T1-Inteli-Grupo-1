@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: devops-plans
+spec:
+  replicas: {{ .Values.PLANSreplicaCount }}
+  selector:
+    matchLabels:
+      app: plans-container
+  template:
+    metadata:
+      labels:
+        app: plans-container
+    spec:
+      containers:
+      - name: plans-container
+        image: {{ .Values.image.repository }}:{{ .Values.image.planstag }}
+        imagePullPolicy: {{ .Values.image.pullPolicy }}
+        ports:
+        - containerPort: {{ .Values.service.plansTargetPort }}
+    # cpu and memory
+        resources:
+          limits:
+            cpu: {{ .Values.resources.limits.cpu }}
+            memory: {{ .Values.resources.limits.memory }}
+          requests:
+            cpu: {{ .Values.resources.requests.cpu }}
+            memory: {{ .Values.resources.requests.memory }}
